@@ -1,52 +1,64 @@
-import { PrismaClient, Prisma } from "../app/generated/prisma/client";
-import { PrismaPg } from '@prisma/adapter-pg'
-import 'dotenv/config'
+import { PrismaClient, Prisma } from "@/app/generated/prisma/client";
+import { PrismaPg } from '@prisma/adapter-pg';
+import 'dotenv/config';
+import fs from 'fs';
 
+// Prisma adapter setup
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
-})
-
-const prisma = new PrismaClient({
-  adapter,
 });
 
-const userData: Prisma.UserCreateInput[] = [
-  {
-    name: "Alice",
-    email: "alice@prisma.io",
-    posts: {
-      create: [
-        {
-          title: "Join the Prisma Discord",
-          content: "https://pris.ly/discord",
-          published: true,
-        },
-        {
-          title: "Prisma on YouTube",
-          content: "https://pris.ly/youtube",
-        },
-      ],
-    },
-  },
-  {
-    name: "Bob",
-    email: "bob@prisma.io",
-    posts: {
-      create: [
-        {
-          title: "Follow Prisma on Twitter",
-          content: "https://www.twitter.com/prisma",
-          published: true,
-        },
-      ],
-    },
-  },
-];
+const prisma = new PrismaClient({ adapter });
 
-export async function main() {
-  for (const u of userData) {
-    await prisma.user.create({ data: u });
+// Load dataset JSON
+const rawData = fs.readFileSync('prisma/food_dataset.json', 'utf-8');
+const foodData: {
+  name: string;
+  tags: string[];
+  imageUrl?: string;
+}[] = JSON.parse(rawData);
+
+// Helper: clean tags by parsing stringified arrays
+function cleanTags(tags: string[]): string[] {
+  const cleaned: string[] = [];
+  for (let tag of tags) {
+    tag = tag.trim();
+
+    // If it looks like a JSON array, try to parse it
+    if (tag.startsWith('[') && tag.endsWith(']')) {
+      try {
+        const parsed = JSON.parse(tag.replace(/\\'/g, "'"));
+        if (Array.isArray(parsed)) {
+          cleaned.push(...parsed.map(t => t.trim()));
+          continue;
+        }
+      } catch {
+        // fallback if parsing fails
+      }
+    }
+
+    // Push the tag normally
+    cleaned.push(tag);
   }
+  return cleaned;
 }
 
-main();
+// Map JSON to Prisma Food model
+const mappedFoodData: Prisma.FoodCreateInput[] = foodData.map(item => ({
+  name: item.name,
+  tags: cleanTags(item.tags),
+  imageUrl: item.imageUrl || null,
+}));
+
+export async function main() {
+  for (const f of mappedFoodData) {
+    await prisma.food.create({ data: f });
+  }
+  console.log(`Seeded ${mappedFoodData.length} food items`);
+}
+
+main()
+  .catch(e => console.error(e))
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

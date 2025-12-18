@@ -26,14 +26,13 @@ model User {
 model Food {
   id        String   @id @default(cuid())
   name      String
-  calories  Float
-  protein   Float
-  carbs     Float
-  fat       Float
-  user      User?    @relation(fields: [userId], references: [id])
+  tags      String[]   
+  imageUrl    String?
+  user      User?      @relation(fields: [userId], references: [id])
   userId    String?
-  createdAt DateTime @default(now())
+  createdAt DateTime   @default(now())
 }
+
 
 
 model MLModel {
