@@ -11,12 +11,20 @@ const adapter = new PrismaPg({
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  // Pull first 50 foods
-  const foods = await prisma.food.findMany({
-    take: 50,
-    select: { name: true, tags: true, imageUrl: true }
-  });
-
+  // Pull first 10000 foods
+const foods = await prisma.food.findMany({
+  take: 10000,
+  where: {
+    tags: {
+      hasSome: ["Homemade food", "Restaurant food"]
+    }
+  },
+  select: {
+    name: true,
+    tags: true,
+    imageUrl: true
+  }
+});
   // Clean tags if nested
   const cleaned = foods.map(f => ({
     name: f.name,
