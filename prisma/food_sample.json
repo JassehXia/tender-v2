@@ -1,0 +1,592 @@
+[
+  {
+    "name": "Fried Chicken",
+    "tags": [
+      "Restaurant food",
+      "[\"chicken\"",
+      "\"breading\"",
+      "\"oil\"]",
+      "Frying"
+    ],
+    "imageUrl": "https://file.b18a.io/7843322356500104680_443548_.jpeg"
+  },
+  {
+    "name": "Pho",
+    "tags": [
+      "Restaurant food",
+      "[\"noodles\"",
+      "\"beef\"",
+      "\"basil\"",
+      "\"lime\"",
+      "\"green onions\"",
+      "\"chili\"]",
+      "boiled"
+    ],
+    "imageUrl": "https://file.b18a.io/7833227147700100732_674878_.jpeg"
+  },
+  {
+    "name": "Pan-fried Dumplings",
+    "tags": [
+      "Restaurant food",
+      "[\"dumplings\"",
+      "\"chili oil\"",
+      "\"soy sauce\"]",
+      "Pan-frying"
+    ],
+    "imageUrl": "https://file.b18a.io/7832600581600103585_264234_.jpg"
+  },
+  {
+    "name": "Bananas",
+    "tags": [
+      "Raw vegetables and fruits",
+      "Bananas",
+      "Raw"
+    ],
+    "imageUrl": "https://file.b18a.io/7839056601700101188_985151_.jpg"
+  },
+  {
+    "name": "Noodle Stir-Fry",
+    "tags": [
+      "Restaurant food",
+      "[\"noodles\"",
+      "\"chicken\"",
+      "\"vegetables\"",
+      "\"sauce\"]",
+      "stir-fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7837642737500100261_173129_.jpeg"
+  },
+  {
+    "name": "Shrimp and Noodle Appetizer",
+    "tags": [
+      "Homemade food",
+      "[\"shrimp\"",
+      "\"noodles\"",
+      "\"garlic\"",
+      "\"green onions\"",
+      "\"chili sauce\"]",
+      "boiled and sautéed"
+    ],
+    "imageUrl": "https://file.b18a.io/7842276099000107874_727850_.jpeg"
+  },
+  {
+    "name": "Mixed Asian Dish",
+    "tags": [
+      "Restaurant food",
+      "[\"beef\"",
+      "\"vegetables\"",
+      "\"rice\"",
+      "\"soup\"]",
+      "stir-fried and boiled"
+    ],
+    "imageUrl": "https://file.b18a.io/7833121953100108589_546678_.jpeg"
+  },
+  {
+    "name": "Dried Noodles",
+    "tags": [
+      "Packaged food",
+      "dried noodles",
+      "Boiled"
+    ],
+    "imageUrl": "https://file.b18a.io/7850509358700101451_892187_.jpeg"
+  },
+  {
+    "name": "Noodle Soup",
+    "tags": [
+      "Restaurant food",
+      "[\"noodles\"",
+      "\"broth\"",
+      "\"meat\"",
+      "\"vegetables\"]",
+      "boiling"
+    ],
+    "imageUrl": "https://file.b18a.io/7866178489900108040_851208_.jpg"
+  },
+  {
+    "name": "Oranges",
+    "tags": [
+      "Raw vegetables and fruits",
+      "oranges",
+      "Raw"
+    ],
+    "imageUrl": "https://file.b18a.io/7837744076300109224_101899_.png"
+  },
+  {
+    "name": "Stuffed Pumpkin",
+    "tags": [
+      "Homemade food",
+      "[\"pumpkin\"",
+      "\"rice\"",
+      "\"meat\"",
+      "\"spices\"]",
+      "Baked"
+    ],
+    "imageUrl": "https://file.b18a.io/7833332020200104809_968244_.jpg"
+  },
+  {
+    "name": "Scrambled Eggs with Bread",
+    "tags": [
+      "Homemade food",
+      "[\"eggs\"",
+      "\"tomatoes\"",
+      "\"onions\"",
+      "\"bread\"]",
+      "scrambled"
+    ],
+    "imageUrl": "https://file.b18a.io/7832699186200100485_251058_.jpeg"
+  },
+  {
+    "name": "Steamed Baby Corn with Sauce",
+    "tags": [
+      "Homemade food",
+      "[\"baby corn\"",
+      "\"sauce\"",
+      "\"lettuce\"]",
+      "steaming"
+    ],
+    "imageUrl": "https://file.b18a.io/7833285847400108355_636697_.jpg"
+  },
+  {
+    "name": "Spicy Crab",
+    "tags": [
+      "Restaurant food",
+      "[\"crab\"",
+      "\"spices\"",
+      "\"vegetables\"",
+      "\"sauce\"]",
+      "stir-fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7833622886400107807_294036_.jpeg"
+  },
+  {
+    "name": "Sandwiches",
+    "tags": [
+      "Restaurant food",
+      "[\"bread\"",
+      "\"meat\"",
+      "\"lettuce\"",
+      "\"tomato\"",
+      "\"cucumber\"]",
+      "Assembled"
+    ],
+    "imageUrl": "https://file.b18a.io/7839226081800109093_100152_.webp"
+  },
+  {
+    "name": "Breakfast Plate",
+    "tags": [
+      "Homemade food",
+      "[\"corn\"",
+      "\"eggs\"",
+      "\"blueberries\"]",
+      "Boiled (for eggs) and raw (for corn and blueberries)"
+    ],
+    "imageUrl": "https://file.b18a.io/7839853481200107496_952010_.jpg"
+  },
+  {
+    "name": "Roasted Chicken",
+    "tags": [
+      "Homemade food",
+      "[\"chicken\"",
+      "\"seasoning\"",
+      "\"sauce\"]",
+      "Roasting"
+    ],
+    "imageUrl": "https://file.b18a.io/7832646867000106547_163728_.jpeg"
+  },
+  {
+    "name": "Noodle Bowl with Meat and Vegetables",
+    "tags": [
+      "Homemade food",
+      "[\"noodles\"",
+      "\"ground meat\"",
+      "\"seaweed\"",
+      "\"carrots\"",
+      "\"bell peppers\"]",
+      "boiled and stir-fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7832637135100109334_489813_.jpeg"
+  },
+  {
+    "name": "Fried Chicken with Salad and Soup",
+    "tags": [
+      "Restaurant food",
+      "[\"fried chicken\"",
+      "\"salad greens\"",
+      "\"soup broth\"",
+      "\"lemon\"",
+      "\"dipping sauce\"]",
+      "Fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7847358523300103851_673820_.jpeg"
+  },
+  {
+    "name": "Meatball in sauce",
+    "tags": [
+      "Restaurant food",
+      "[\"meat\"",
+      "\"sauce\"",
+      "\"green onions\"]",
+      "boiled or simmered"
+    ],
+    "imageUrl": "https://file.b18a.io/7838946668200106359_887715_.jpg"
+  },
+  {
+    "name": "Mixed Fried Chicken Dishes",
+    "tags": [
+      "Restaurant food",
+      "[\"chicken wings\"",
+      "\"fried ribs\"",
+      "\"spicy sauce\"",
+      "\"green peppers\"]",
+      "Fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7832733917900106063_487027_.jpeg"
+  },
+  {
+    "name": "Breakfast Sandwich",
+    "tags": [
+      "Homemade food",
+      "[\"bread\"",
+      "\"cheese\"",
+      "\"egg\"",
+      "\"sausage\"]",
+      "Grilled"
+    ],
+    "imageUrl": "https://file.b18a.io/7833304717200105406_153199_.jpeg"
+  },
+  {
+    "name": "Spicy Chicken Stir-Fry",
+    "tags": [
+      "Homemade food",
+      "[\"chicken\"",
+      "\"green peppers\"",
+      "\"red peppers\"",
+      "\"spices\"]",
+      "stir-frying"
+    ],
+    "imageUrl": "https://file.b18a.io/7841868424900103978_594068_.jpg"
+  },
+  {
+    "name": "Hot Pot",
+    "tags": [
+      "Homemade food",
+      "[\"beef\"",
+      "\"shrimp\"",
+      "\"tofu\"",
+      "\"vegetables\"",
+      "\"noodles\"]",
+      "boiling"
+    ],
+    "imageUrl": "https://file.b18a.io/7894011851200108484_946454_.jpg"
+  },
+  {
+    "name": "Glazed Fruit",
+    "tags": [
+      "Homemade food",
+      "[\"fruit\"",
+      "\"sugar\"",
+      "\"glaze\"]",
+      "Baking or glazing"
+    ],
+    "imageUrl": "https://file.b18a.io/7841722106600100889_462964_.jpg"
+  },
+  {
+    "name": "Steamed Snails",
+    "tags": [
+      "Homemade food",
+      "[\"snails\"",
+      "\"garlic\"",
+      "\"herbs\"",
+      "\"dipping sauce\"]",
+      "steamed"
+    ],
+    "imageUrl": "https://file.b18a.io/7832682395200106845_349337_.jpeg"
+  },
+  {
+    "name": "Dairy Drink",
+    "tags": [
+      "Packaged food",
+      "[\"milk\"",
+      "\"sugar\"",
+      "\"stabilizers\"]"
+    ],
+    "imageUrl": "https://file.b18a.io/7836693395600103174_835929_.jpg"
+  },
+  {
+    "name": "Noodle Soup",
+    "tags": [
+      "Restaurant food",
+      "[\"noodles\"",
+      "\"meat\"",
+      "\"broth\"",
+      "\"vegetables\"]",
+      "boiling"
+    ],
+    "imageUrl": "https://file.b18a.io/7842637825200108034_298018_.jpg"
+  },
+  {
+    "name": "Fruit Dessert",
+    "tags": [
+      "Homemade food",
+      "[\"fruit\"",
+      "\"sugar\"",
+      "\"cream\"]",
+      "Chilled"
+    ],
+    "imageUrl": "https://file.b18a.io/7836383126900103801_976077_.jpeg"
+  },
+  {
+    "name": "Vegetable Noodles",
+    "tags": [
+      "Homemade food",
+      "[\"noodles\"",
+      "\"green onions\"",
+      "\"bean sprouts\"",
+      "\"chili peppers\"",
+      "\"soy sauce\"]",
+      "stir-fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7842596174900104131_140222_.jpeg"
+  },
+  {
+    "name": "Stir-fried Meat Dish",
+    "tags": [
+      "Restaurant food",
+      "[\"meat\"",
+      "\"onions\"",
+      "\"peppers\"",
+      "\"sauce\"]",
+      "stir-frying"
+    ],
+    "imageUrl": "https://file.b18a.io/7874188598100102788_807742_.jpg"
+  },
+  {
+    "name": "Chicken Stir-Fry",
+    "tags": [
+      "Homemade food",
+      "[\"chicken\"",
+      "\"bell peppers\"",
+      "\"onions\"",
+      "\"soy sauce\"]",
+      "stir-frying"
+    ],
+    "imageUrl": "https://file.b18a.io/7844756349300102433_118555_.jpg"
+  },
+  {
+    "name": "French Toast with Ice Cream",
+    "tags": [
+      "Restaurant food",
+      "[\"bread\"",
+      "\"ice cream\"",
+      "\"chocolate sauce\"",
+      "\"blueberries\"",
+      "\"almonds\"]",
+      "Fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7836119355100108298_615830_.jpeg"
+  },
+  {
+    "name": "Fruit-flavored drink",
+    "tags": [
+      "Packaged food",
+      "[\"apple flavor\"",
+      "\"water\"",
+      "\"sugar\"",
+      "\"preservatives\"]"
+    ],
+    "imageUrl": "https://file.b18a.io/7839009252600104085_460937_.jpg"
+  },
+  {
+    "name": "Apple",
+    "tags": [
+      "Raw vegetables and fruits",
+      "apple",
+      "Raw"
+    ],
+    "imageUrl": "https://file.b18a.io/7840773636700102334_189520_.jpeg"
+  },
+  {
+    "name": "Tacos",
+    "tags": [
+      "Homemade food",
+      "[\"taco shell\"",
+      "\"ground beef\"",
+      "\"cheddar cheese\"",
+      "\"lettuce\"",
+      "\"tomato\"",
+      "\"onion\"",
+      "\"jalapeño\"]",
+      "assembled"
+    ],
+    "imageUrl": "https://file.b18a.io/7833116101500106006_406755_.jpg"
+  },
+  {
+    "name": "Shrimp Egg Cups",
+    "tags": [
+      "Homemade food",
+      "[\"shrimp\"",
+      "\"egg\"",
+      "\"lettuce\"",
+      "\"carrot\"",
+      "\"coriander\"]",
+      "Fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7833715206800105744_452496_.jpeg"
+  },
+  {
+    "name": "Spaghetti with Beef Sauce",
+    "tags": [
+      "Restaurant food",
+      "[\"pasta\"",
+      "\"beef sauce\"",
+      "\"tomatoes\"",
+      "\"basil\"]",
+      "boiled and simmered"
+    ],
+    "imageUrl": "https://file.b18a.io/7833811386100102632_381078_.jpg"
+  },
+  {
+    "name": "Chicken Stir Fry with Bun",
+    "tags": [
+      "Homemade food",
+      "[\"chicken\"",
+      "\"carrots\"",
+      "\"green onions\"",
+      "\"bamboo shoots\"",
+      "\"bun\"]",
+      "stir-frying"
+    ],
+    "imageUrl": "https://file.b18a.io/7842300408900101376_514692_.jpg"
+  },
+  {
+    "name": "Spaghetti with Tomato Sauce",
+    "tags": [
+      "Homemade food",
+      "[\"spaghetti\"",
+      "\"tomato\"",
+      "\"olive oil\"",
+      "\"garlic\"",
+      "\"herbs\"]",
+      "boiling and sautéing"
+    ],
+    "imageUrl": "https://file.b18a.io/7834169320900107363_976452_.jpeg"
+  },
+  {
+    "name": "Mixed Rice with Meat and Vegetables",
+    "tags": [
+      "Restaurant food",
+      "[\"rice\"",
+      "\"meat\"",
+      "\"egg\"",
+      "\"pumpkin\"",
+      "\"greens\"",
+      "\"noodles\"]",
+      "Steamed and stir-fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7837802608000109194_273628_.jpeg"
+  },
+  {
+    "name": "Noodle Soup",
+    "tags": [
+      "Restaurant food",
+      "[\"noodles\"",
+      "\"broth\"",
+      "\"meat\"",
+      "\"vegetables\"",
+      "\"eggs\"]",
+      "boiled"
+    ],
+    "imageUrl": "https://file.b18a.io/7858438358200107951_574488_.jpg"
+  },
+  {
+    "name": "Noodle Bowl",
+    "tags": [
+      "Homemade food",
+      "[\"noodles\"",
+      "\"red peppers\"",
+      "\"green onions\"",
+      "\"meat\"]",
+      "boiled and mixed"
+    ],
+    "imageUrl": "https://file.b18a.io/7841633198700106767_541728_.png"
+  },
+  {
+    "name": "Braised Pork",
+    "tags": [
+      "Homemade food",
+      "[\"pork\"",
+      "\"rice\"",
+      "\"soy sauce\"",
+      "\"sesame seeds\"]",
+      "braising"
+    ],
+    "imageUrl": "https://file.b18a.io/7902242673900109661_971189_.jpg"
+  },
+  {
+    "name": "Fried Fish Noodle Soup",
+    "tags": [
+      "Homemade food",
+      "[\"fried fish\"",
+      "\"noodles\"",
+      "\"spinach\"",
+      "\"green onions\"",
+      "\"chili\"]",
+      "boiled and fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7837910806500100926_267298_.jpeg"
+  },
+  {
+    "name": "Noodles in broth",
+    "tags": [
+      "Homemade food",
+      "[\"noodles\"",
+      "\"broth\"",
+      "\"spices\"]",
+      "boiling"
+    ],
+    "imageUrl": "https://file.b18a.io/7833329874600104172_151568_.jpg"
+  },
+  {
+    "name": "Savory Snack Bar",
+    "tags": [
+      "Packaged food",
+      "[\"nuts\"",
+      "\"sugar\"",
+      "\"flavoring\"]",
+      "Packaged"
+    ],
+    "imageUrl": "https://file.b18a.io/7847432840600103561_328402_.jpg"
+  },
+  {
+    "name": "Mixed Meat Platter",
+    "tags": [
+      "Restaurant food",
+      "[\"chicken\"",
+      "\"pork\"",
+      "\"green onions\"",
+      "\"vegetables\"]",
+      "Grilled and stir-fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7854955575200100562_147822_.jpg"
+  },
+  {
+    "name": "Vegetable Fritters",
+    "tags": [
+      "Homemade food",
+      "[\"vegetables\"",
+      "\"batter\"",
+      "\"spices\"]",
+      "Fried"
+    ],
+    "imageUrl": "https://file.b18a.io/7833130646100101983_820795_.jpeg"
+  },
+  {
+    "name": "Cooked Meat",
+    "tags": [
+      "Homemade food",
+      "meat",
+      "pan-frying"
+    ],
+    "imageUrl": "https://file.b18a.io/7980112273300109101_450281_.jpg"
+  }
+]
