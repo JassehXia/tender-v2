@@ -14,26 +14,26 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String   @unique
-  clerkId   String   @unique // if you’re using Clerk auth
-  createdAt DateTime @default(now())
-  foods     Food[]
-  mlModels  MLModel[]
+  id               String            @id @default(cuid())
+  name             String?
+  email            String            @unique
+  clerkId          String            @unique // if you’re using Clerk auth
+  createdAt        DateTime          @default(now())
+  foods            Food[]
+  mlModels         MLModel[]
+  foodInteractions FoodInteraction[]
 }
 
 model Food {
-  id        String   @id @default(cuid())
-  name      String
-  tags      String[]   
-  imageUrl    String?
-  user      User?      @relation(fields: [userId], references: [id])
-  userId    String?
-  createdAt DateTime   @default(now())
+  id               String            @id @default(cuid())
+  name             String
+  tags             String[]
+  imageUrl         String?
+  user             User?             @relation(fields: [userId], references: [id])
+  userId           String?
+  createdAt        DateTime          @default(now())
+  foodInteractions FoodInteraction[]
 }
-
-
 
 model MLModel {
   id          String   @id @default(cuid())
@@ -42,4 +42,25 @@ model MLModel {
   createdAt   DateTime @default(now())
   user        User?    @relation(fields: [userId], references: [id])
   userId      String?
+}
+
+model FoodInteraction {
+  id        String          @id @default(cuid())
+  userId    String
+  foodId    String
+  action    InteractionType
+  createdAt DateTime        @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  food Food @relation(fields: [foodId], references: [id])
+
+  @@index([userId])
+  @@index([foodId])
+}
+
+enum InteractionType {
+  LIKE
+  DISLIKE
+  SAVE
+  SKIP
 }
