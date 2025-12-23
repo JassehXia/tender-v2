@@ -1,15 +1,8 @@
-import prisma from '@/lib/prisma'
-import dynamic from "next/dynamic";
-
-// Dynamically import the client-side FoodTinderCard
-const FoodTinderCard = dynamic(() => import("./components/food-card"), {
-  ssr: false,
-});
+import prisma from "@/lib/prisma";
+import FoodTinderSection from "./components/FoodTinderSection";
 
 export default async function Home() {
   const users = await prisma.user.findMany();
-
-  // For demonstration, pick the first user as "current user"
   const currentUserId = users.length > 0 ? users[0].id : "";
 
   return (
@@ -18,7 +11,8 @@ export default async function Home() {
         Superblog
       </h1>
 
-      <FoodTinderCard userId={currentUserId} />
+      {/* Client-side Tinder card */}
+      <FoodTinderSection userId={currentUserId} />
 
       <ol className="list-decimal list-inside font-[family-name:var(--font-geist-sans)] mt-8">
         {users.map((user) => (

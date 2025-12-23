@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type Food = {
   id: string;
@@ -19,7 +20,7 @@ export default function FoodTinderCard({ userId }: { userId: string }) {
   const fetchRandomFood = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/food");
+      const res = await fetch("/api/food/random");
       if (!res.ok) throw new Error("Failed to fetch food");
       const data = await res.json();
       setFood(data);
@@ -59,11 +60,15 @@ export default function FoodTinderCard({ userId }: { userId: string }) {
   return (
     <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-8">
       {food.imageUrl && (
-        <img
-          className="w-full h-64 object-cover"
-          src={food.imageUrl}
-          alt={food.name}
-        />
+        <div className="relative w-full h-64">
+          <Image
+            src={food.imageUrl}
+            alt={food.name}
+            fill
+            className="object-cover rounded-t-lg"
+            priority
+          />
+        </div>
       )}
       <div className="p-4">
         <h2 className="text-xl font-bold mb-2">{food.name}</h2>

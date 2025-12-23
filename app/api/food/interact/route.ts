@@ -21,6 +21,11 @@ export async function POST(req: Request){
                 {status: 400}
             )
         }
+
+        if(action === "SKIP"){
+            return NextResponse.json({success: true});
+        }
+
         // Check if interaction already exists
         const existing = await prisma.foodInteraction.findFirst({
             where: {userId, foodId},
