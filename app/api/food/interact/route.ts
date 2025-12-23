@@ -10,7 +10,7 @@ export async function POST(req: Request){
 
         if(!userId || !foodId || !action){
             return NextResponse.json(
-                {error: "userId, foodId, and action are requred"},
+                {error: "userId, foodId, and action are required"},
                 {status: 400}
             )
         }
