@@ -1,8 +1,6 @@
 import { type Metadata } from 'next'
 import {
   ClerkProvider,
-  SignInButton,
-  SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,

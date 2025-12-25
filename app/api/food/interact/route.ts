@@ -1,21 +1,16 @@
+// app/api/food/interact/route.ts
 import { NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 
 type InteractionType = "LIKE" | "DISLIKE" | "SAVE" | "SKIP";
 
 export async function POST(req: Request) {
   try {
-    const { userId } = await auth();
+    const { userId, foodId, action } = await req.json();
 
     if (!userId) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const { foodId, action } = await req.json();
 
     if (!foodId || !action) {
       return NextResponse.json(
@@ -26,10 +21,7 @@ export async function POST(req: Request) {
 
     const validActions: InteractionType[] = ["LIKE", "DISLIKE", "SAVE", "SKIP"];
     if (!validActions.includes(action)) {
-      return NextResponse.json(
-        { error: "Invalid action" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid action" }, { status: 400 });
     }
 
     // SKIP doesn't persist

@@ -1,4 +1,3 @@
-// components/FoodTinderCard.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -13,7 +12,11 @@ type Food = {
 
 type Interaction = "LIKE" | "DISLIKE" | "SAVE" | "SKIP";
 
-export default function FoodTinderCard() {
+interface FoodTinderCardProps {
+  userId: string;
+}
+
+export default function FoodTinderCard({ userId }: FoodTinderCardProps) {
   const [food, setFood] = useState<Food | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -39,10 +42,12 @@ export default function FoodTinderCard() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          userId, // include userId here
           foodId: food.id,
           action,
         }),
       });
+
       fetchRandomFood();
     } catch (err) {
       console.error(err);
