@@ -1,26 +1,20 @@
-import prisma from "@/lib/prisma";
+import { getOrCreateUser } from "@/lib/getOrCreateUser";
 import FoodTinderSection from "./components/FoodTinderSection";
+import { SignedIn, SignedOut } from '@clerk/nextjs'
 
 export default async function Home() {
-  const users = await prisma.user.findMany();
-  const currentUserId = users.length > 0 ? users[0].id : "";
+  // Ensure the Prisma user exists for the signed-in Clerk user
+  await getOrCreateUser();
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center -mt-16">
-      <h1 className="text-4xl font-bold mb-8 font-[family-name:var(--font-geist-sans)] text-[#333333]">
-        Superblog
-      </h1>
-
-      {/* Client-side Tinder card */}
-      <FoodTinderSection userId={currentUserId} />
-
-      <ol className="list-decimal list-inside font-[family-name:var(--font-geist-sans)] mt-8">
-        {users.map((user) => (
-          <li key={user.id} className="mb-2">
-            {user.name}
-          </li>
-        ))}
-      </ol>
+      <SignedIn>
+      <FoodTinderSection />
+      </SignedIn>
+      <SignedOut>
+      <div className="text-2xl font-bold text-gray-700">Sign in to start using Tender</div>
+      </SignedOut>
     </div>
   );
 }

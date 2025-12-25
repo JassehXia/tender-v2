@@ -13,7 +13,7 @@ type Food = {
 
 type Interaction = "LIKE" | "DISLIKE" | "SAVE" | "SKIP";
 
-export default function FoodTinderCard({ userId }: { userId: string }) {
+export default function FoodTinderCard() {
   const [food, setFood] = useState<Food | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -39,7 +39,6 @@ export default function FoodTinderCard({ userId }: { userId: string }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userId,
           foodId: food.id,
           action,
         }),
