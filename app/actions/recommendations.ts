@@ -1,8 +1,7 @@
 'use server';
 
-import prisma from '@/lib/prisma';
-import { getMLPredictions } from '@/lib/mlClient';
-import {auth} from '@clerk/nextjs/server';
+import prisma from '@/lib/prisma'
+import { auth } from '@clerk/nextjs/server'
 
 export async function getPersonalizedRecommendations(limit: number = 10) {
   const { userId } = await auth();
@@ -36,6 +35,7 @@ export async function getPersonalizedRecommendations(limit: number = 10) {
       message: 'Need at least 5 food interactions to get recommendations',
       currentCount: interactions.length,
       recommendations: [],
+      interactionCount: interactions.length,
     };
   }
 
@@ -51,7 +51,8 @@ export async function getPersonalizedRecommendations(limit: number = 10) {
 
   try {
     // Call the API route (or import getRecommendations directly)
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'}/api/predict`, {
+    const baseUrl = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/food/predict`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ foods, interactions }),
@@ -69,6 +70,7 @@ export async function getPersonalizedRecommendations(limit: number = 10) {
       success: true,
       recommendations: predictions.slice(0, limit),
       total: predictions.length,
+      interactionCount: interactions.length,
     };
   } catch (error) {
     console.error('ML Prediction error:', error);
@@ -76,6 +78,7 @@ export async function getPersonalizedRecommendations(limit: number = 10) {
       success: false,
       message: error instanceof Error ? error.message : 'Failed to get recommendations',
       recommendations: [],
+      interactionCount: interactions.length,
     };
   }
 }
@@ -98,13 +101,52 @@ export async function recordInteraction(
     throw new Error('User not found');
   }
 
-  await prisma.foodInteraction.create({
-    data: {
+  // Check if interaction already exists
+  const existingInteraction = await prisma.foodInteraction.findFirst({
+    where: {
       userId: user.id,
-      foodId,
-      action,
+      foodId: foodId,
     },
   });
 
+  if (existingInteraction) {
+    // Update existing interaction
+    await prisma.foodInteraction.update({
+      where: { id: existingInteraction.id },
+      data: { action },
+    });
+  } else {
+    // Create new interaction
+    await prisma.foodInteraction.create({
+      data: {
+        userId: user.id,
+        foodId,
+        action,
+      },
+    });
+  }
+
   return { success: true };
+}
+
+export async function getUserInteractionCount() {
+  const { userId } = await auth();
+  
+  if (!userId) {
+    return 0;
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { clerkId: userId },
+  });
+
+  if (!user) {
+    return 0;
+  }
+
+  const count = await prisma.foodInteraction.count({
+    where: { userId: user.id },
+  });
+
+  return count;
 }

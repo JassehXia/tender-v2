@@ -1,4 +1,7 @@
 import * as tf from '@tensorflow/tfjs';
+import '@tensorflow/tfjs-backend-cpu';
+
+tf.setBackend('cpu');
 
 const STOP_TAGS = new Set(['homemade food', 'restaurant food']);
 
@@ -22,124 +25,140 @@ interface Prediction {
   score: number;
 }
 
-function cleanTag(tag: string): string | null {
+/* ----------------------------- Tag Cleaning ----------------------------- */
+
+function cleanTag(tag: unknown): string | null {
   if (typeof tag !== 'string') return null;
-  
+
   const cleaned = tag
     .replace(/[\[\]"']/g, '')
     .trim()
     .toLowerCase();
-  
-  if (STOP_TAGS.has(cleaned) || cleaned === '') return null;
-  
+
+  if (!cleaned || STOP_TAGS.has(cleaned)) return null;
+
   return cleaned;
 }
 
-function cleanTagList(tags: string[]): string[] {
+function cleanTagList(tags: unknown[]): string[] {
   return tags
     .map(cleanTag)
-    .filter((tag): tag is string => tag !== null);
+    .filter((t): t is string => t !== null);
 }
 
-function oneHotEncode(foods: FoodItem[]): { encoded: number[][], allTags: string[] } {
-  // Get all unique tags
+/* --------------------------- Feature Encoding ---------------------------- */
+
+function oneHotEncode(
+  foods: FoodItem[]
+): { features: number[][]; tagCount: number } {
   const tagSet = new Set<string>();
-  foods.forEach(food => {
-    cleanTagList(food.tags).forEach(tag => tagSet.add(tag));
-  });
-  
-  const allTags = Array.from(tagSet).sort();
-  const tagToIndex = new Map(allTags.map((tag, idx) => [tag, idx]));
-  
-  // Create one-hot encoded matrix
-  const encoded = foods.map(food => {
-    const vector = new Array(allTags.length).fill(0);
+
+  foods.forEach(f =>
+    cleanTagList(f.tags).forEach(t => tagSet.add(t))
+  );
+
+  const tags = Array.from(tagSet);
+  const tagIndex = new Map(tags.map((t, i) => [t, i]));
+
+  const features = foods.map(food => {
+    const vec = new Array(tags.length).fill(0);
     cleanTagList(food.tags).forEach(tag => {
-      const idx = tagToIndex.get(tag);
-      if (idx !== undefined) {
-        vector[idx] = 1;
-      }
+      const idx = tagIndex.get(tag);
+      if (idx !== undefined) vec[idx] = 1;
     });
-    return vector;
+    return vec;
   });
-  
-  return { encoded, allTags };
+
+  return { features, tagCount: tags.length };
 }
+
+/* -------------------------- Main Recommendation -------------------------- */
 
 export async function getRecommendations(
   foods: FoodItem[],
   interactions: Interaction[]
 ): Promise<Prediction[]> {
-  // Clean tags
-  const cleanedFoods = foods.map(food => ({
-    ...food,
-    tags: cleanTagList(food.tags)
-  }));
-  
-  // One-hot encode
-  const { encoded, allTags } = oneHotEncode(cleanedFoods);
-  
-  // Create labels from interactions
-  const interactionMap = new Map<string, number>();
-  interactions.forEach(interaction => {
-    if (interaction.action === 'LIKE') {
-      interactionMap.set(interaction.foodId, 1);
-    } else if (interaction.action === 'DISLIKE') {
-      interactionMap.set(interaction.foodId, 0);
-    }
+  if (!foods.length) return [];
+
+  /* ---------- Cold start: no usable interactions ---------- */
+  const labelsMap = new Map<string, number>();
+  interactions.forEach(i => {
+    if (i.action === 'LIKE') labelsMap.set(i.foodId, 1);
+    if (i.action === 'DISLIKE') labelsMap.set(i.foodId, 0);
   });
-  
-  const labels = cleanedFoods.map(food => 
-    interactionMap.get(food.id) ?? 0
-  );
-  
-  // Convert to tensors
-  const X = tf.tensor2d(encoded);
-  const y = tf.tensor2d(labels, [labels.length, 1]);
-  
-  // Build model
-  const model = tf.sequential({
-    layers: [
-      tf.layers.dense({ inputShape: [allTags.length], units: 8, activation: 'relu' }),
+
+  const hasSignal = labelsMap.size >= 2;
+
+  /* ---------- Feature encoding ---------- */
+  const cleanedFoods = foods.map(f => ({
+    ...f,
+    tags: cleanTagList(f.tags),
+  }));
+
+  const { features, tagCount } = oneHotEncode(cleanedFoods);
+
+  /* ---------- Hard fallback: no tags ---------- */
+  if (tagCount === 0 || !hasSignal) {
+    return cleanedFoods.map(food => ({
+      id: food.id,
+      name: food.name,
+      tags: food.tags,
+      imageUrl: food.imageUrl,
+      score: 0.5,
+    }));
+  }
+
+  /* ---------- Labels ---------- */
+  const labels = cleanedFoods.map(f => labelsMap.get(f.id) ?? 0);
+
+  let X: tf.Tensor | null = null;
+  let y: tf.Tensor | null = null;
+  let model: tf.Sequential | null = null;
+
+  try {
+    X = tf.tensor2d(features);
+    y = tf.tensor2d(labels, [labels.length, 1]);
+
+    model = tf.sequential();
+    model.add(
+      tf.layers.dense({
+        inputShape: [tagCount],
+        units: 8,
+        activation: 'relu',
+      })
+    );
+    model.add(
       tf.layers.dense({ units: 1, activation: 'sigmoid' })
-    ]
-  });
-  
-  // Compile model
-  model.compile({
-    optimizer: tf.train.adam(0.01),
-    loss: 'binaryCrossentropy',
-    metrics: ['accuracy']
-  });
-  
-  // Train model
-  await model.fit(X, y, {
-    epochs: 50,
-    verbose: 0,
-    shuffle: true
-  });
-  
-  // Make predictions
-  const predictions = model.predict(X) as tf.Tensor;
-  const scores = await predictions.array() as number[][];
-  
-  // Clean up tensors
-  X.dispose();
-  y.dispose();
-  predictions.dispose();
-  model.dispose();
-  
-  // Prepare results
-  const results: Prediction[] = cleanedFoods.map((food, i) => ({
-    id: food.id,
-    name: food.name,
-    tags: food.tags,
-    imageUrl: food.imageUrl,
-    score: scores[i][0]
-  }));
-  
-  // Sort by score (highest first)
-  results.sort((a, b) => b.score - a.score);
-  
-  return results;
+    );
+
+    model.compile({
+      optimizer: tf.train.adam(0.01),
+      loss: 'binaryCrossentropy',
+    });
+
+    await model.fit(X, y, {
+      epochs: 30,
+      shuffle: true,
+      verbose: 0,
+    });
+
+    const preds = model.predict(X) as tf.Tensor;
+    const scores = (await preds.array()) as number[][];
+
+    preds.dispose();
+
+    return cleanedFoods
+      .map((food, i) => ({
+        id: food.id,
+        name: food.name,
+        tags: food.tags,
+        imageUrl: food.imageUrl,
+        score: scores[i]?.[0] ?? 0.5,
+      }))
+      .sort((a, b) => b.score - a.score);
+  } finally {
+    X?.dispose();
+    y?.dispose();
+    model?.dispose();
+  }
 }
