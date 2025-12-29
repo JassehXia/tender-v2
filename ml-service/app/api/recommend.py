@@ -1,16 +1,20 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from app.services.recommender import recommend
+from app.services.model import recommend
 
 router = APIRouter()
 
 class RecommendRequest(BaseModel):
     food_ids: list[int]
 
-class RecommendResponse(BaseModel):
-    ranked_food_ids: list[int]
+class RankedFood(BaseModel):
+    id: int
+    prob: float
 
-@router.post("/recommend",response_model=RecommendRequest)
-def recommend_foods(payload: RecommendRequest):
+class RecommendResponse(BaseModel):
+    ranked_foods: list[RankedFood]
+
+@router.post("/recommend", response_model=RecommendResponse)
+def recommend_endpoint(payload: RecommendRequest):
     ranked = recommend(payload.food_ids)
-    return {"ranked_food_ids":ranked}
+    return {"ranked_foods": ranked}
