@@ -17,6 +17,17 @@
 /.next/
 /out/
 
+# Python virtual environment
+.venv/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+
+
 # production
 /build
 
